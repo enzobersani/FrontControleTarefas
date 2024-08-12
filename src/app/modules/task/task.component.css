@@ -1,0 +1,104 @@
+.task-detail-container-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 95vh;
+  margin: 0;
+  padding: 0;
+}
+
+.task-detail-container {
+  width: 97%;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  position: relative;
+}
+
+.task-header {
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.task-header h1 {
+  font-size: 2rem;
+  color: #333;
+}
+
+.task-info {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 15px;
+}
+
+.task-label {
+  font-weight: bold;
+  color: #555;
+  margin-right: 10px;
+}
+
+.task-value {
+  color: #333;
+}
+
+.task-body {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #666;
+}
+
+.task-body p {
+  font-size: 1rem;
+  color: #444444;
+  word-wrap: break-word;
+}
+
+.task-footer {
+  margin-top: auto;
+}
+
+.time-trackers-container {
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+.title {
+  margin: 0;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.time-trackers-list {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.time-trackers-list ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.time-trackers-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.po-modal {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+}
+
+.po-modal-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}

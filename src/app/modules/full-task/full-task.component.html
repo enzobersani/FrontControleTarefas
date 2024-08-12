@@ -1,0 +1,19 @@
+<po-page-default p-title="Horas Gastas">
+    <div class="po-row">
+        <po-widget
+        class="po-lg-6"
+        p-title="{{ date | date:'dd/MM/yyyy' }}"
+        [p-height]="300"
+        >
+        <div class="po-font-subtitle po-text-center">{{this.hoursToday}}</div>
+        </po-widget>
+
+        <po-widget
+        class="po-lg-6"
+        p-title="{{ date | date:'MM/yyyy' }}"
+        [p-height]="300"
+        >
+        <div class="po-font-subtitle po-text-center">{{this.hoursMonth}}</div>
+        </po-widget>
+    </div>
+</po-page-default>

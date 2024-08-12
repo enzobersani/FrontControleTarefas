@@ -1,0 +1,25 @@
+.primeiro-botao{
+    margin-bottom: 10px;
+}
+
+.filter-panel{
+    margin-top: 15px;
+}
+
+.btn-filtro{
+    margin-top: 10px;
+}
+
+.checkbox-spacing {
+    margin-right: 15px;
+}
+
+.task-cards{
+    margin-top: 15px;
+}
+
+.po-card-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }

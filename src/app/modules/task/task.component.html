@@ -1,0 +1,102 @@
+<po-page-default>
+  <div class="task-detail-container-wrapper">
+    <div class="task-detail-container">
+      <div class="task-header">
+        <h1>{{ task?.name }}</h1>
+        <div class="task-info">
+          <span class="task-label">Colaborador:</span>
+          <span class="task-value">{{ task?.collaboratorName || 'Não definido' }}</span>
+        </div>
+      </div>
+      <div class="task-body">
+        <p>{{ task?.description || 'Sem descrição' }}</p>
+      </div>
+      
+      <div class="time-trackers-container">
+        <h3 class="title">Horas Registradas</h3>
+        <div class="time-trackers-list">
+          <ul>
+            <li *ngFor="let collaborator of collaborators">
+              {{ collaborator.collaboratorName }} - {{ collaborator.startTime | date:'dd/MM/yyyy' }} - {{ collaborator.hours }} horas
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <po-link p-label="Adicionar registro de horas"
+      (p-action)="modalHoras.open()"
+      >       
+      </po-link>
+
+      <div class="po-row">
+        <po-button 
+          style="margin-top: 10px; margin-right: 10px;"
+          p-label="{{ timerRunning ? 'Parar cronômetro' : 'Iniciar cronômetro' }}"
+          (p-click)="toggleTimer()">
+        </po-button>
+        <span *ngIf="timerRunning">Tempo decorrido: {{ elapsedTime }}</span>
+      </div>
+
+      <div class="task-footer">
+        <po-button p-label="Atualizar" (p-click)="updateTask()" class="po-md-4 po-sm-4"></po-button>
+        <po-button p-label="Excluir" (p-click)="deleteTask()" class="po-md-4 po-sm-4"></po-button>
+        <po-button p-label="Voltar" (p-click)="closeTask()" class="po-md-4 po-sm-4"></po-button>
+      </div>
+      
+      <po-modal #modal p-title="Atualizar Tarefa">
+        <form #optionsForm="ngForm">
+            <po-input
+            p-label="Informe um nome..."
+            [(ngModel)]="nameAtualizar"
+            name="nameAtualizar"
+            >
+            </po-input>
+            <po-textarea
+            [p-maxlength]="255"
+            p-label="Informe uma descrição..."
+            [(ngModel)]="description"
+            name="description"
+            >
+            </po-textarea>
+            <po-combo
+            p-label="Informe um colaborador..."
+            name="comboCollaborator"
+            [p-clean]="true"
+            (p-change)="onCollaboratorChange($event)"
+            [p-options]="options"
+            >   
+            </po-combo>
+        </form>
+        <po-modal-footer [p-disabled-align]="false">
+            <po-button p-danger="true" p-label="Fechar" (p-click)="fechar()"> </po-button>
+            <po-button p-label="Limpar" (p-click)="restore()"> </po-button>
+            <po-button p-kind="primary" p-label="Confirmar" (p-click)="confirmar()"> </po-button>
+        </po-modal-footer>
+      </po-modal>
+
+      <po-modal #modalHoras p-title="Inserir horas">
+        <po-datepicker
+        p-label="Informe uma data..."
+        [(ngModel)]="dataHoras"
+        ></po-datepicker>
+        <po-input
+        [(ngModel)]="horaInicial"
+        p-mask="99:99"
+        p-label="Hora inicial..."
+        (p-blur)="validarHora(horaInicial)"
+        ></po-input>
+        <po-input
+        [(ngModel)]="horaFinal"
+        p-mask="99:99"
+        p-label="Hora final..."
+        (p-blur)="validarHora(horaFinal)"
+        ></po-input>
+
+        <po-modal-footer [p-disabled-align]="false">
+          <po-button p-danger="true" p-label="Fechar" (p-click)="modalHoras.close()"></po-button>
+          <po-button p-kind="primary" p-label="Confirmar" (p-click)="inserirHoras()"> </po-button>
+      </po-modal-footer>
+      </po-modal>
+    </div>
+  </div>
+</po-page-default>

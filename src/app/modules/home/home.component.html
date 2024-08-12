@@ -1,0 +1,55 @@
+<po-page-default p-title="Projetos">
+    <div class="container">
+        <div class="container-adicionar">
+            <po-button
+            id="button-buscar"
+            class="po-md-3 po-sm-5"
+            p-icon="fa fa-check-circle"
+            p-label="Adicionar"
+            p-kind="primary"
+            (p-click)="modal.open()"
+            ></po-button>
+        </div>
+        <div class="po-row container-buscar">
+            <div class="po-row"></div>
+            <po-input
+            class="po-md-8"
+            p-placeholder="Buscar projeto por nome..."
+            [(ngModel)]="inputNameProjeto"
+            ></po-input>
+            <po-button
+            id="button-buscar"
+            class="po-md-4"
+            p-icon="fa fa-check-circle"
+            p-label="Buscar"
+            (p-click)="onSearch()"
+            ></po-button>
+        </div>
+        <div class="po-row project-cards">
+            @for (project of projects; track $index) {   
+                <po-widget
+                class="po-xl-4 po-lg-4 po-md-12 widget"
+                [p-height]="70"
+                (p-click)="abrirProjeto(project)">
+                    <div class=" po-text-center">{{project.name}}</div>
+                </po-widget>
+            }
+        </div>
+    </div>
+
+    <ng-template #loading>
+        <p>Carregando projetos...</p>
+    </ng-template>
+
+    <po-modal #modal p-title="Adicionar Projeto">
+        <po-textarea
+        [p-maxlength]="255"
+        p-label="Informe um nome para o projeto."
+        [(ngModel)]="name">
+        </po-textarea>
+        <po-modal-footer [p-disabled-align]="false">
+            <po-button p-danger="true" p-label="Close" (p-click)="fechar()"> </po-button>
+            <po-button p-kind="primary" p-label="Confirm" (p-click)="confirmar()"> </po-button>
+        </po-modal-footer>
+    </po-modal>
+</po-page-default>

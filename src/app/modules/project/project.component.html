@@ -1,0 +1,126 @@
+<po-page-default p-title={{project?.name}}>
+    <div class="container">
+        <div class="po-row primeiro-botao">
+            <po-button
+            p-label="Atualizar projeto"
+            p-kind="tertiary"
+            class="po-md-6 po-sm-6"
+            (p-click)="modalAtualizaocao.open()"
+            ></po-button>
+            <po-button
+            p-label="Apagar projeto"
+            p-kind="tertiary"
+            class="po-md-6 po-sm-6"
+            (p-click)="deleteProject()"
+            >
+            ></po-button>
+        </div>
+        <div class="po-row">
+            <po-button
+                p-label="Adicionar tarefa"
+                p-kind="primary"
+                class="po-md-4 po-sm-4"
+                (p-click)="abrirModal()"
+            ></po-button>
+            <po-button
+                p-label="Filtro"
+                p-kind="secondary"
+                class="po-md-4 po-sm-4"
+                (p-click)="toggleFilter()"
+            ></po-button>
+            <po-button
+            p-label="Voltar"
+            p-kind="secondary"
+            class="po-md-4 po-sm-4"
+            (p-click)="voltar()"
+            ></po-button>
+        </div>
+
+        @if(showFilter){
+            <div class="filter-panel">
+                <div class="filter">
+                    <div class="po-row">
+                        <po-input
+                            class="po-md-6 po-sm-6"
+                            p-label="Buscar por nome"
+                            [(ngModel)]="filterName"
+                            p-placeholder="Digite o nome do projeto"
+                        ></po-input>
+                        <po-combo
+                            class="po-md-6 po-sm-6"
+                            p-label="Informe um colaborador..."
+                            name="comboCollaborator"
+                            [p-clean]="true"
+                            (p-change)="onCollaboratorChange($event)"
+                            [p-options]="options"
+                        >   
+                        </po-combo>
+                    </div>
+                    <div class="btn-filtro">
+                        <po-button 
+                            p-label="Aplicar Filtro"
+                            (p-click)="applyFilter()"
+                        ></po-button>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="po-row task-cards">
+            @for (task of tasks; track $index) {   
+                <po-widget
+                [p-title]="task.name"
+                class="po-xl-4 po-lg-4 po-md-12 widget"
+                [p-height]="110"
+                (p-click)="openTask(task)"
+                >
+                    <div class="po-row">
+                        <div>{{task.collaboratorName}}</div>
+                    </div>
+                </po-widget>
+            }
+        </div>
+    </div>
+    <po-modal #modal p-title="Adicionar Tarefa">
+        <form #optionsForm="ngForm">
+            <po-input
+            p-label="Informe um nome..."
+            [(ngModel)]="name"
+            name="name"
+            >
+            </po-input>
+            <po-textarea
+            [p-maxlength]="255"
+            p-label="Informe uma descrição..."
+            [(ngModel)]="description"
+            name="description"
+            >
+            </po-textarea>
+            <po-combo
+            p-label="Informe um colaborador..."
+            name="comboCollaborator"
+            [p-clean]="true"
+            (p-change)="onCollaboratorChange($event)"
+            [p-options]="options"
+            >   
+            </po-combo>
+        </form>
+        <po-modal-footer [p-disabled-align]="false">
+            <po-button p-danger="true" p-label="Fechar" (p-click)="fechar()"> </po-button>
+            <po-button p-label="Limpar" (p-click)="restore()"> </po-button>
+            <po-button p-kind="primary" p-label="Confirmar" (p-click)="confirmar()"> </po-button>
+        </po-modal-footer>
+    </po-modal>
+
+    <po-modal #modalAtualizaocao p-title="Atualizar Projeto">
+        <po-textarea
+        [p-maxlength]="255"
+        p-label="Informe um nome para o projeto."
+        [(ngModel)]="name">
+        </po-textarea>
+        <po-modal-footer [p-disabled-align]="false">
+            <po-button p-danger="true" p-label="Close" (p-click)="modalAtualizaocao.close()"> </po-button>
+            <po-button p-kind="primary" p-label="Confirm" (p-click)="confirmarAtualizacao()"> </po-button>
+        </po-modal-footer>
+    </po-modal>
+</po-page-default>
